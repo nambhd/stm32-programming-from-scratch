@@ -21,3 +21,9 @@ STM32 Embedded Programming, learn to program from scratch
 - Configure PC13 as Output push/pull
 - Inside super loop:
   - Read PA0 and toogle pin PC13 depends on PA0 state
+### Basic GPIO input/output library
+Implement basic GPIO library:
+- Init GPIO port
+- Read PIN
+- Write PIN
+- Toggle PIN

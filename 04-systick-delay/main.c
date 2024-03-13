@@ -29,9 +29,9 @@ void delay(int delay)
 // Interrupt period 1ms = HCLK / 1000 (T)
 void SysTick_Init(void)
 {
-	
+	SysTick->CTRL = 0; // Disable SysTick
 	SysTick->LOAD = (HCLK / 1000) - 1; // Maximum value is 0x00FF.FFFF
-	SysTick->VAL = 0;
+	SysTick->VAL = 0; // It has random value on reset -> We need reset SysTick counter value
 	SysTick->CTRL = 7; //0101 -> Set CTRL_CLKSOURCE = processor clock; CTRL_TICKINT = 1; CTRL_ENABLE = 1
 }
 

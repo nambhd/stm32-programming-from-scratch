@@ -33,3 +33,10 @@ Implement basic GPIO library:
 - Configure Rising edge, write 1  to bit 0 of EXTI_RTSR
 - Set priority and enable Interrupt
 - On IRQ Handler, clear the interrupt by writing 1 to bit 0 of Pending Register (EXTI_PR)
+### SysTick Delay
+- SysTick_Init(): Initialize the SysTick with interrupt period is in 1ms:
+  - SysTick->LOAD = (HCLK / 1000) - 1; // Maximum value is 0x00FF.FFFF
+  - SysTick->VAL = 0; // Reset current value
+  - SysTick->CTRL = 7; //0101 -> Set CTRL_CLKSOURCE = processor clock; CTRL_TICKINT = 1; CTRL_ENABLE = 1
+- SysTick_Handler(): SysTick interrupt service routime
+- SysTick_Delay_ms(): Delay in specific miliseconds

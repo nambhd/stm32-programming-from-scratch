@@ -27,3 +27,9 @@ Implement basic GPIO library:
 - Read PIN
 - Write PIN
 - Toggle PIN
+### External Interrupt using registers
+- Configure EXTI0 line for PA0, we need modify bit 3:2:1:0 of AFIO_EXTICR1 with 0:0:0:0
+- Disable EXTI mask, write 1 to bit 0 of EXTI_IRM
+- Configure Rising edge, write 1  to bit 0 of EXTI_RTSR
+- Set priority and enable Interrupt
+- On IRQ Handler, clear the interrupt by writing 1 to bit 0 of Pending Register (EXTI_PR)

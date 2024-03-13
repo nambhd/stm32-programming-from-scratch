@@ -1,7 +1,7 @@
 #include "stm32f10x.h"
 #include "gp_drive.h"
 
-const int HCLK = 108000000;
+const unsigned long HCLK = 108000000;
 volatile uint32_t time_delay;
 
 void delay(int delay);

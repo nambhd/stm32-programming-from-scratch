@@ -40,3 +40,11 @@ Implement basic GPIO library:
   - SysTick->CTRL = 7; //0101 -> Set CTRL_CLKSOURCE = processor clock; CTRL_TICKINT = 1; CTRL_ENABLE = 1
 - SysTick_Handler(): SysTick interrupt service routime
 - SysTick_Delay_ms(): Delay in specific miliseconds
+### Basic UART communication
+-  Alternate function I/O clock enable
+-  UART2 clock enable
+-  Init PA3 as Rx, PA2 as Tx (Alternate function Output push pull)
+-  Set the baude rate
+-  USART2 enable
+-  Receive & transmit the message
+  

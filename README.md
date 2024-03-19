@@ -47,4 +47,6 @@ Implement basic GPIO library:
 -  Set the baude rate
 -  USART2 enable
 -  Receive & transmit the message
-  
+### USART basic library
+- Init USART 1,2,3
+- Calc the setting value of USART BRR (Baude rate register)

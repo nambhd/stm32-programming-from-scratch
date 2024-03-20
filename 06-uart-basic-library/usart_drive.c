@@ -179,3 +179,14 @@ void USART_TX(unsigned short usart, char c)
 		USART3->DR = c;
 	}
 }
+
+void USART_Send(unsigned short usart, char str[])
+{
+	int i = 0;
+	while(str[i] != '\0')
+	{
+		USART_TX(usart, str[i]);
+		i++;
+		SysTick_Delay(1);
+	}
+}

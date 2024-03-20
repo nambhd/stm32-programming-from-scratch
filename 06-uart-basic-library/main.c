@@ -2,7 +2,7 @@
 #include "gp_drive.h"
 #include "usart_drive.h"
 
-char letter = 'A';
+char c = 'A';
 
 int main(void)
 {
@@ -12,11 +12,9 @@ int main(void)
 	while(1)
 	{
 		// Receive message
-		while((USART2->SR & 0x20) == 0x00);
-		letter = USART2->DR;
+		c = USART_RX(2);
 		
 		// Transmit message
-		while((USART2->SR & 0x80) == 0x80);
-		USART2->DR = letter;
+		USART_TX(2, c);
 	}
 }

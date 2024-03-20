@@ -138,3 +138,44 @@ void UART_Init(unsigned short usart, unsigned long br)
 		USART3->CR1 |= 0x2000;
 	}
 }
+
+char USART_RX(unsigned short usart)
+{
+	char c;
+	if (usart == 1)
+	{
+		while((USART1->SR & 0x20) == 0x00);
+		c = USART1->DR;
+	}
+	else if (usart == 2)
+	{
+		while((USART2->SR & 0x20) == 0x00);
+		c = USART2->DR;
+	}
+	else if (usart == 3)
+	{
+		while((USART3->SR & 0x20) == 0x00);
+		c = USART3->DR;
+	}
+	
+	return c;
+}
+
+void USART_TX(unsigned short usart, char c)
+{
+	if (usart == 1)
+	{
+		while((USART1->SR & 0x80) == 0x80);
+		USART1->DR = c;
+	}
+	else if (usart == 2)
+	{
+		while((USART2->SR & 0x80) == 0x80);
+		USART2->DR = c;
+	}
+	else if (usart == 3)
+	{
+		while((USART3->SR & 0x80) == 0x80);
+		USART3->DR = c;
+	}
+}

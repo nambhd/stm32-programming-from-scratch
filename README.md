@@ -50,3 +50,4 @@ Implement basic GPIO library:
 ### USART basic library
 - Init USART 1,2,3
 - Calc the setting value of USART BRR (Baude rate register)
+- Transmit/Receive character functions

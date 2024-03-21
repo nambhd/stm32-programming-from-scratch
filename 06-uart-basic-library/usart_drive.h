@@ -7,3 +7,5 @@ void UART_Init(unsigned short usart, unsigned long br);
 char USART_RX(unsigned short usart);
 void USART_TX(unsigned short usart, char c);
 void USART_Send(unsigned short usart, char str[]);
+void USART(unsigned short usart, unsigned short bridge, unsigned short * signal, unsigned short * counter, char str[]);
+void str_empty(char str[]);

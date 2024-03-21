@@ -94,6 +94,10 @@ void UART_Init(unsigned short usart, unsigned long br)
 		
 		// USSART enable
 		USART1->CR1 |= 0x2000;
+		
+		// RXNE interrupt enable
+		USART1->CR1 |= 0x20;
+		NVIC_EnableIRQ(USART1_IRQn);
 	}
 	else if (usart == 2)
 	{
@@ -115,6 +119,10 @@ void UART_Init(unsigned short usart, unsigned long br)
 		
 		// USSART enable
 		USART2->CR1 |= 0x2000;
+		
+		// RXNE interrupt enable
+		USART1->CR1 |= 0x20;
+		NVIC_EnableIRQ(USART1_IRQn);
 	}
 	else if (usart == 3)
 	{
@@ -136,6 +144,10 @@ void UART_Init(unsigned short usart, unsigned long br)
 		
 		// USSART enable
 		USART3->CR1 |= 0x2000;
+		
+		// RXNE interrupt enable
+		USART1->CR1 |= 0x20;
+		NVIC_EnableIRQ(USART1_IRQn);
 	}
 }
 
@@ -188,5 +200,36 @@ void USART_Send(unsigned short usart, char str[])
 		USART_TX(usart, str[i]);
 		i++;
 		SysTick_Delay(1);
+	}
+}
+
+void USART(unsigned short usart, unsigned short bridge, unsigned short * signal, unsigned short * counter, char str[])
+{
+	if (bridge == 0)
+	{
+		str[*counter] = USART_RX(usart);
+		if (str[*counter] == '\n')
+		{
+			*counter = 0;
+			*signal = 1;
+		}
+		else
+		{
+			*counter = *counter + 1;
+		}
+	}
+	else
+	{
+		USART_TX(usart, USART_RX(usart));
+	}
+}
+
+void str_empty(char str[])
+{
+	int i = 0;
+	while(str[i] != '\0')
+	{
+		str[i] = '\0';
+		i++;
 	}
 }

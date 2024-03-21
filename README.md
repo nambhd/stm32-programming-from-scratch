@@ -52,3 +52,6 @@ Implement basic GPIO library:
 - Calc the setting value of USART BRR (Baude rate register)
 - Transmit/Receive character functions
 - Send string
+- STM32 device can work as bridge, processor, or both
+- USART interrupt enable on receive
+

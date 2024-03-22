@@ -177,17 +177,17 @@ void USART_TX(unsigned short usart, char c)
 {
 	if (usart == 1)
 	{
-		while((USART1->SR & 0x80) == 0x80);
+		while((USART1->SR & 0x80) == 0x00);
 		USART1->DR = c;
 	}
 	else if (usart == 2)
 	{
-		while((USART2->SR & 0x80) == 0x80);
+		while((USART2->SR & 0x80) == 0x00);
 		USART2->DR = c;
 	}
 	else if (usart == 3)
 	{
-		while((USART3->SR & 0x80) == 0x80);
+		while((USART3->SR & 0x80) == 0x00);
 		USART3->DR = c;
 	}
 }
@@ -199,7 +199,6 @@ void USART_Send(unsigned short usart, char str[])
 	{
 		USART_TX(usart, str[i]);
 		i++;
-		SysTick_Delay(1);
 	}
 }
 

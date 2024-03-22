@@ -202,24 +202,33 @@ void USART_Send(unsigned short usart, char str[])
 	}
 }
 
-void USART(unsigned short usart, unsigned short bridge, unsigned short * signal, unsigned short * counter, char str[])
+void USART_ISR(unsigned short usart, unsigned short usart_mng[], char str[])
 {
-	if (bridge == 0)
+	if (usart_mng[2] == 0)
 	{
-		str[*counter] = USART_RX(usart);
-		if (str[*counter] == '\n')
+		str[usart_mng[0]] = USART_RX(usart);
+		if (usart_mng[3])
 		{
-			*counter = 0;
-			*signal = 1;
+			if (str[usart_mng[0]] == usart_mng[4])
+			{
+				usart_mng[0] = 0;
+				usart_mng[1] = 1;
+			}
+			else
+			{
+				usart_mng[0]++;
+			}
 		}
 		else
 		{
-			*counter = *counter + 1;
+			usart_mng[0]++;
+			usart_mng[6] = usart_mng[5];
+			SysTick_Interrupt_Start();
 		}
 	}
 	else
 	{
-		USART_TX(usart, USART_RX(usart));
+		USART_TX(usart_mng[2], USART_RX(usart));
 	}
 }
 
@@ -231,4 +240,15 @@ void str_empty(char str[])
 		str[i] = '\0';
 		i++;
 	}
+}
+
+void USART_Msg(unsigned short usart, char str[], unsigned short str_mng[])
+{
+	unsigned long timeOut = 108000000;
+	USART_Send(usart, str);
+	while (str_mng[1] == 0 && timeOut != 0)
+	{
+		timeOut--;
+	}
+	str_mng[1] = 0;
 }
